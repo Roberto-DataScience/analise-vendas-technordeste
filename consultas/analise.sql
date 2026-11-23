@@ -19,10 +19,13 @@
 
 -- P1. Quantos pedidos existem em cada status (Entregue, Cancelado, Devolvido)?
 --     E qual a porcentagem de cada um sobre o total?
+-- Achado: 91,67% dos pedidos foram entregues. 8,33% não geraram receita
+-- (5,95% cancelados e 2,38% devolvidos). Vale investigar o que causa os cancelamentos (ver P6).
 
 
 -- P2. Qual o faturamento total, o número de pedidos entregues e o ticket médio do semestre?
-
+-- Achado: no semestre, a loja faturou R$ 275.885,73 com 385 pedidos entregues,
+-- um ticket médio de R$ 716,59 por pedido.
 
 -- =====================================================
 -- PARTE 2: TEMPO
@@ -31,6 +34,11 @@
 -- P3. Qual o faturamento, o número de pedidos e o ticket médio de cada mês?
 --     Dica: substr(data_pedido, 1, 7) extrai o "ano-mês" (ex.: '2026-05').
 --     Qual mês vendeu mais pedidos? E qual faturou mais? É o mesmo mês?
+-- Achado: maio foi o melhor mês em pedidos (91, cerca de 34% a mais que junho, o 2º colocado)
+-- e em faturamento (R$ 54.885,64), mas teve o MENOR ticket médio do semestre (R$ 603,14).
+-- Hipótese: o Dia das Mães aumentou as compras de presentes de menor valor (a testar no desafio D2).
+-- Fevereiro foi o pior mês (R$ 37.751,10), possivelmente pelos gastos de fim de ano e carnaval.
+-- Obs.: fevereiro tem só 28 dias; por dia, a queda em relação a janeiro é menor (1,75 vs 1,9 pedido/dia).
 
 
 -- =====================================================
