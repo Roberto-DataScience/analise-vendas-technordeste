@@ -118,7 +118,21 @@ ORDER BY taxa_cancelamento DESC;
 -- PARTE 4: CLIENTES
 -- =====================================================
 
+
 -- P7. Faturamento por estado, do maior para o menor.
+SELECT c.estado,
+       ROUND(SUM(pe.quantidade * pe.preco_unitario), 2) AS faturamento,
+       COUNT(DISTINCT c.id_cliente) AS qtd_clientes
+FROM pedidos AS pe
+JOIN clientes AS c
+  ON pe.id_cliente = c.id_cliente
+WHERE pe.status = 'Entregue'
+GROUP BY c.estado
+ORDER BY faturamento DESC;
+-- Achado: a Bahia lidera (R$ 78.552,72, com 14 clientes), seguida de Pernambuco (R$ 63.303,61).
+-- Surpresa: Sergipe é o 3º estado em faturamento (R$ 57.793,56) com apenas 8 clientes,
+-- puxado por 3 clientes que gastaram mais de R$ 10 mil cada.
+-- O Piauí tem só 1 cliente ativo e faturou R$ 1.450,71: mercado pouco explorado.
 
 
 -- P8. Ticket médio por canal de aquisição (Instagram, Google, Indicação, TikTok).
