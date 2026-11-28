@@ -136,7 +136,19 @@ ORDER BY faturamento DESC;
 
 
 -- P8. Ticket médio por canal de aquisição (Instagram, Google, Indicação, TikTok).
-
+       ROUND(SUM(pe.quantidade * pe.preco_unitario), 2) AS faturamento,
+       COUNT(*) AS qtd_pedidos,
+       ROUND(SUM(pe.quantidade * pe.preco_unitario) / COUNT(*), 2) AS ticket_medio
+FROM pedidos AS pe
+JOIN clientes AS c
+  ON pe.id_cliente = c.id_cliente
+WHERE pe.status = 'Entregue'
+GROUP BY c.canal
+ORDER BY ticket_medio DESC;
+-- Achado: o Instagram traz o maior ticket médio (R$ 827,30), seguido da Indicação (R$ 784,97).
+-- O Google gera o maior faturamento total (R$ 82.690,90) por volume de pedidos (123),
+-- mas com ticket médio menor (R$ 672,28). O TikTok tem o menor ticket (R$ 637,77).
+-- Recomendação: Google e TikTok trazem volume; Instagram e Indicação trazem pedidos de maior valor.
 
 -- P9. Quantos clientes cadastrados nunca fizeram nenhum pedido? Quem são?
 
